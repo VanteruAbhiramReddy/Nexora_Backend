@@ -1,0 +1,100 @@
+Modules to build:
+
+1. auth
+2. projects
+3. invitations
+4. project-members
+5. tasks
+
+Endpoints:
+
+1. auth
+    
+    - login
+    POST /auth/login
+    {
+        "email":"",
+        "password":""
+    }
+    - signup
+    POST /auth/signup
+    {
+        "name":"",
+        "email":"",
+        "password":""
+    }
+    - logout
+    DELETE /auth/logout
+    - me
+    GET /auth/me
+    - delete-account
+    POST /auth/delete-account
+    {
+        "password":""
+    }
+
+2. projects(Protected routes)
+
+    - GET ALL
+    GET /api/projects
+
+    - GET THE SPECIFIC PROJECT DETAILS
+    GET /api/projects/:id
+
+    - CREATE NEW PROJECT
+    POST /api/projects
+    {
+        "name":"",
+        "description":""
+    }
+
+    - Update a project
+    PUT /api/projects
+    {
+        "id":"",
+        "name"?:"",
+        "descriptionYou've already put a lot of thought into the schema, RBAC, and API design. At this stage, it's mostly a matter of implementing each piece step by step. Happy coding! 🚀"?:""
+        "owner_id"?:"" (Changing ownership)
+    }
+
+    - DELETE THE PROJECT
+    DELETE /api/projects (This only works if the project has no active resources like tasks, invitations, and members)
+
+3. invitations
+
+    - List all invitations
+    GET /api/invitations/:projectId
+
+    - Invite someone
+    POST /api/invitations
+    {
+        "project_Id":"",
+        "message":"",
+        "invited_user_id":"",
+        "role":enum('OWNER','MANAGER','MEMBER')
+    }
+
+    - Accept invitations
+    PUT /api/invitations
+    {
+        "id":"",
+        "status":"JOINED"
+    }
+
+    -Reject invitations
+    PUT /api/invitations
+    {
+        "id":"",
+        "status":"REJECTED"
+    }
+
+    -Cancel invitation
+    DELETE /api/invitations/:invitationId
+
+4. project-members
+
+    - Add user to the project
+
+    - Get all users of the project
+
+    - 
