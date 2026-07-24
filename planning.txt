@@ -21,7 +21,12 @@ Endpoints:
     {
         "name":"",
         "email":"",
-        "password":""
+        "password":"",
+        "bio":"",
+        "phone":"",
+        "LINKED_IN_URL":"",
+        "GITHUB_URL":"",
+        "AVATAR_URL":""
     }
     - logout
     DELETE /auth/logout

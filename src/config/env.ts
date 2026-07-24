@@ -6,7 +6,7 @@ const envSchema = z.object({
     SESSION_SECRET : z.string().min(5),
     NODE_ENV : z.enum(['development','production','testing']).default('development'),
     DB_URL : z.url(),
-    FRONTEND_URL : z.url()
+    FRONTEND_URL : z.url().optional() // Currently optional because I'm testing the backend with postman.
 })
 
 dotenv.config()

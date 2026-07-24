@@ -2,7 +2,6 @@ import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import cookieParser from 'cookie-parser'
-
 import path from "path";
 import { fileURLToPath } from "url";
 import session from "express-session";
@@ -11,6 +10,8 @@ import pgsession from "connect-pg-simple";
 import db from './shared/db/db.js'; 
 import env from './config/env.js';
 import errorMiddleware from './shared/Middlewares/error.middleware.js';
+
+import auth from './modules/auth/auth.routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -55,7 +56,7 @@ server.use(session({
     }
 }));
 
-
+server.use("/auth",auth);
 
 server.use(errorMiddleware);
 server.listen(port, () => {
