@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "setup": "npm install bcrypt connect-pg-simple cookie-parser cors dotenv express express-session helmet pg",
-    "setup-types": "npm install -D @types/bcrypt @types/connect-pg-simple @types/cookie-parser @types/cors @types/dotenv @types/express @types/express-session @types/helmet @types/pg tsx typescript"
+    "setup-types": "npm install -D @types/node @types/bcrypt @types/connect-pg-simple @types/cookie-parser @types/cors @types/dotenv @types/express @types/express-session @types/helmet @types/pg tsx typescript"
   },
   "keywords": [],
   "author": "Abhiram",
@@ -35,6 +35,7 @@
     "@types/express": "^5.0.6",
     "@types/express-session": "^1.19.0",
     "@types/helmet": "^0.0.48",
+    "@types/node": "^26.1.1",
     "@types/pg": "^8.20.0",
     "tsx": "^4.23.1",
     "typescript": "^7.0.2"
