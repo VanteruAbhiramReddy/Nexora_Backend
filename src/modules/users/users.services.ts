@@ -2,7 +2,33 @@ import bcrypt from 'bcrypt';
 
 import db from "../../shared/db/db.js";
 import { User,SafeUser } from '../../shared/types/users.types.js';
+import AppError from '../../shared/Utilities/appError.js';
 
+export async function getCurrentUserData(id: number | unknown): Promise<SafeUser> {
+    const res = await db.query<SafeUser>('SELECT ID,NAME,EMAIL,BIO,PHONE,LINKED_IN_URL,GITHUB_URL,AVATAR_URL FROM USERS WHERE ID=$1;', [id]);
+    const data = res.rows[0];
+    return data;
+}
+
+export async function getAllUsersData(): Promise<SafeUser[]> {
+    const res = await db.query<SafeUser>('SELECT ID,NAME,EMAIL,BIO,PHONE,LINKED_IN_URL,GITHUB_URL,AVATAR_URL FROM USERS;');
+    const data = res.rows;
+    return data;
+}
+
+export async function getUserByEmail(email:string) {
+    const res = await db.query<SafeUser>('SELECT ID,NAME,EMAIL,BIO,PHONE,LINKED_IN_URL,GITHUB_URL,AVATAR_URL FROM USERS WHERE EMAIL = $1',[email]);
+    const data = res.rows;
+    if(!data) throw new AppError("User not found",404);
+    return data[0];
+}
+
+export async function getUserById(id:string) {
+    const res = await db.query<SafeUser>('SELECT ID,NAME,EMAIL,BIO,PHONE,LINKED_IN_URL,GITHUB_URL,AVATAR_URL FROM USERS WHERE ID = $1;',[id]);
+    const data = res.rows;
+    if(!data) throw new AppError("User not found",404);
+    return data[0];
+}
 
 export async function deleteUser(id: number | unknown, password: string): Promise<Boolean> {
     const userData = await db.query<User>('SELECT ID,HASHED_PASSWORD FROM USERS WHERE ID = $1;', [id]);
@@ -17,8 +43,8 @@ export async function deleteUser(id: number | unknown, password: string): Promis
     return false;
 }
 
-export async function getCurrentUserData(id: number | unknown): Promise<SafeUser> {
-    const res = await db.query<SafeUser>('SELECT ID,NAME,EMAIL,BIO,PHONE,LINKED_IN_URL,GITHUB_URL,AVATAR_URL FROM USERS WHERE ID=$1;', [id]);
+export async function editUser(query:string,id:number|unknown,values:unknown[]):Promise<SafeUser> {
+    const res = await db.query<SafeUser>(`UPDATE USERS SET ${query}, UPDATED_AT=NOW() WHERE ID = $${values.length+1} RETURNING ID,NAME,EMAIL,STATUS,BIO,PHONE,LINKED_IN_URL,GITHUB_URL,AVATAR_URL;`,[...values,id]);
     const data = res.rows[0];
     return data;
 }
