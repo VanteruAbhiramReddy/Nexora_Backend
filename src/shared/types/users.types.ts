@@ -1,9 +1,11 @@
+type status = 'ACTIVE'|'INACTIVE'
 export interface User{
     id:number;
     name:string;
     email:string;
     password:string,
-    hashed_password :string
+    hashed_password :string,
+    status ?: status,
     bio:string,
     phone:string,
     linked_in_url : string,
