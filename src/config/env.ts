@@ -2,10 +2,11 @@ import {z} from 'zod'
 import dotenv from 'dotenv'
 
 const envSchema = z.object({
-    PORT : z.string().min(2).default("5000"),
-    DB_URL : z.string().min(1),
+    PORT: z.coerce.number().int().positive().default(5000),
     SESSION_SECRET : z.string().min(5),
-    NODE_ENV : z.enum(['DEVELOPMENT','PRODUCTION','TESTING']).default('DEVELOPMENT')
+    NODE_ENV : z.enum(['development','production','testing']).default('development'),
+    DB_URL : z.url(),
+    FRONTEND_URL : z.url()
 })
 
 dotenv.config()
