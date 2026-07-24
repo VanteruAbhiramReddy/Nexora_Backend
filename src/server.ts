@@ -39,6 +39,8 @@ server.use(
 
 const secret = env.SESSION_SECRET;
 
+server.set("trust proxy",1)
+
 server.use(session({
 
     store: new PgStore({
