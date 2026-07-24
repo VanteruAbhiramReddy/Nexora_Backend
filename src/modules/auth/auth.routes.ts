@@ -1,10 +1,10 @@
 import { Router } from "express";
 
-import authMiddleware from "../../shared/Middlewares/auth.middleware.js";
+import { authenticate } from "../../shared/Middlewares/auth.middlewares.js";
 import validator from "../../shared/Utilities/validator.js";
 
-import { signUpController,loginController,manageNewSession,logoutController,deleteUserController, myProfileController } from "./auth.controllers.js";
-import { signUpSchema,loginSchema, deleteAccountSchema } from "./auth.schemas.js";
+import { signUpController,loginController,manageNewSession,logoutController } from "./auth.controllers.js";
+import { signUpSchema,loginSchema } from "./auth.schemas.js";
 
 
 const auth = Router();
@@ -12,9 +12,6 @@ const auth = Router();
 auth.post('/signup',validator(signUpSchema),signUpController,manageNewSession);
 auth.post('/login',validator(loginSchema),loginController,manageNewSession);
 
-auth.delete('/logout',authMiddleware,logoutController);
-auth.post('/delete-account',validator(deleteAccountSchema),authMiddleware,deleteUserController,logoutController);
-
-auth.get('/me',authMiddleware,myProfileController);
+auth.delete('/logout',authenticate,logoutController);
 
 export default auth;

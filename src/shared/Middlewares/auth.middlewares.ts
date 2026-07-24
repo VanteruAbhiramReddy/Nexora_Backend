@@ -1,7 +1,7 @@
 import asyncHandler from "../Utilities/asyncHandler.js";
 import { Request, Response, NextFunction } from "express";
 
-const authMiddleware = asyncHandler(
+export const authenticate = asyncHandler(
     async (
         req: Request,
         res: Response,
@@ -23,5 +23,3 @@ const authMiddleware = asyncHandler(
         next();
     }
 );
-
-export default authMiddleware;

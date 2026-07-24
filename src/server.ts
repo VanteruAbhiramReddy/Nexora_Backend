@@ -12,6 +12,7 @@ import env from './config/env.js';
 import errorMiddleware from './shared/Middlewares/error.middleware.js';
 
 import auth from './modules/auth/auth.routes.js';
+import users from './modules/users/users.routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,6 +58,7 @@ server.use(session({
 }));
 
 server.use("/auth",auth);
+server.use("/users",users);
 
 server.use(errorMiddleware);
 server.listen(port, () => {

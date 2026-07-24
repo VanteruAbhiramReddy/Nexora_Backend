@@ -1,9 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import asyncHandler from '../../shared/Utilities/asyncHandler.js';
 
-import { createUser, loginUser, deleteUser, getCurrentUserData } from './auth.services.js';
-import { DeleteDTO, LoginDTO, SignUpDTO } from './auth.types.js';
-import { success } from 'zod';
+import { createUser, loginUser } from './auth.services.js';
+import { LoginDTO, SignUpDTO } from './auth.types.js';
 
 
 export const signUpController = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
@@ -28,23 +27,6 @@ export const manageNewSession = asyncHandler(async (req, res) => {
     const data = req.userData;
     res.json({ success: true, data });
     return;
-})
-
-export const deleteUserController = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    const { password } = req.validated as DeleteDTO
-    const id = req.userId;
-    const isDeleted = await deleteUser(id, password);
-    if (!isDeleted) {
-        res.status(401).json({ success: false, message: "Wrong Password" });
-        return;
-    }
-    next()
-})
-
-export const myProfileController = asyncHandler(async (req: Request, res: Response) => {
-    const id = req.userId;
-    const data = await getCurrentUserData(id);
-    res.json({ "success": true, data });
 })
 
 export const logoutController = asyncHandler(async (req: Request, res: Response) => {

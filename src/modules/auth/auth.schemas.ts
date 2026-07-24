@@ -16,6 +16,3 @@ export const loginSchema = z.object({
     password : z.string()
 })
 
-export const deleteAccountSchema = z.object({
-    password : z.string()
-})
