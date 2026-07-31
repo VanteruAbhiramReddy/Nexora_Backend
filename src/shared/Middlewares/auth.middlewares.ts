@@ -12,7 +12,7 @@ export const authenticate = asyncHandler(
         if (!userId) {
             res.status(401).json({
                 success: false,
-                message: "Unauthorized"
+                message: "Not Authenticated!"
             });
 
             return;

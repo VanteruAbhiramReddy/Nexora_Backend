@@ -3,14 +3,16 @@ export interface User{
     id:number;
     name:string;
     email:string;
-    password:string,
-    hashed_password :string,
-    status ?: status,
-    bio:string,
-    phone:string,
-    linked_in_url : string,
-    github_url : string,
-    avatar_url : string,
+    password:string;
+    hashed_password :string;
+    status ?: status;
+    bio:string;
+    phone:string;
+    linked_in_url : string;
+    github_url : string;
+    avatar_url : string;
+    created_at : string;
+    updated_at : string;
 }
 
 export type SafeData = Omit<User,"password">

@@ -103,3 +103,60 @@ Endpoints:
     - Get all users of the project
 
     - 
+
+
+
+
+/* projects(Protected routes)
+
+    - GET ALL
+    GET /api/projects
+
+    - GET THE SPECIFIC PROJECT DETAILS
+    GET /api/projects/:id
+
+    - CREATE NEW PROJECT
+    POST /api/projects
+    {
+        "name":"",
+        "description":""
+    }
+
+    - Update a project
+    PUT /api/projects
+    {
+        "id":"",
+        "name":"",
+        "description":""
+        "owner_id"?:"" (Changing ownership)
+    }
+
+    - DELETE THE PROJECT
+    DELETE /api/projects (This only works if the project has no active resources like tasks, invitations, and members)
+*/
+
+
+USERS
+ROLES
+PROJECTS
+PROJECT_MEMBERS
+
+1. It should return 
+    project id,
+    name, 
+    description,
+    founder name,
+    owner name,
+    no. of active members
+
+Projects -> users
+Project_member | -> ROLES
+
+Select ID, NAME, DESCRIPTION, USERS.NAME AS founder
+FROM PROJECTS INNER JOIN USERS ON USERS.ID = CREATED_BY;
+
+SELECT USER_ID, USERS.NAME FROM PROJECT_MEMBERS
+INNER JOIN USERS ON USERS.ID = USER_ID
+
+
+SELECT ID, NAME, DESCRIPTION, (SELECT NAME FROM USERS WHERE ID = USER_ID) AS FOUNDER, (SELECT NAME FROM USERS WHERE ID = (SELECT USER_ID FROM PROJECT_MEMBERS WHERE ROLE = 1)) AS OWNER, (SELECT COUNT(*) FROM PROJECT_MEMBERS WHERE PROJECT_ID = project_id ) as members from projects;

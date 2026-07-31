@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import asyncHandler from '../../shared/Utilities/asyncHandler.js';
 import concat from '../../shared/Utilities/concatenator.js';
 
-import { deleteUser, getCurrentUserData, getAllUsersData, getUserByEmail, getUserById, editUser } from './users.services.js';
+import { deleteUser, getAllUsersData, getUserByEmail, getUserById, editUser } from './users.services.js';
 import { DeleteDTO, GetUserByEmailDTO, GetUserByIdDTO, PatchUserDTO } from './users.types.js';
 
 export const allUsersController = asyncHandler(async (req: Request, res: Response) => {
@@ -17,14 +17,14 @@ export const getUserByEmailController = asyncHandler(async (req: Request<GetUser
 })
 
 export const getUserByIdController = asyncHandler(async (req: Request<GetUserByIdDTO>, res: Response) => {
-    const id = req.params.id;
+    const id = Number(req.params.id);
     const user = await getUserById(id);
     res.status(200).json({ success: true, user });
 })
 
 export const myProfileController = asyncHandler(async (req: Request, res: Response) => {
     const id = req.userId;
-    const data = await getCurrentUserData(id);
+    const data = await getUserById(id);
     res.json({ "success": true, data });
 })
 

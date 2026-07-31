@@ -6,9 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
-    "setup": "npm install bcrypt connect-pg-simple cookie-parser cors dotenv express express-session helmet pg",
-    "setup-types": "npm install -D @types/node @types/bcrypt @types/connect-pg-simple @types/cookie-parser @types/cors @types/dotenv @types/express @types/express-session @types/helmet @types/pg tsx typescript"
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "Abhiram",
